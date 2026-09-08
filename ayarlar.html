@@ -649,14 +649,14 @@ html, body { overflow-x: hidden; }
           <div class="setting-label" data-i18n="ay.gizlilik">Gizlilik Politikası</div>
           <div class="setting-desc" data-i18n="ay.gizlilik_alt">Verilerinizi nasıl koruyoruz</div>
         </div>
-        <a href="https://repertuvar.app/privacy" target="_blank" rel="noopener" class="setting-btn" data-i18n="ay.goruntule">Görüntüle →</a>
+        <a id="hukukGizlilik" href="https://repertuvar.app/privacy" target="_blank" rel="noopener" class="setting-btn" data-i18n="ay.goruntule">Görüntüle →</a>
       </div>
       <div class="setting-row">
         <div>
           <div class="setting-label" data-i18n="ay.kosullar">Kullanım Koşulları</div>
           <div class="setting-desc" data-i18n="ay.kosullar_alt">Hizmet şartlarımız</div>
         </div>
-        <a href="https://repertuvar.app/terms" target="_blank" rel="noopener" class="setting-btn" data-i18n="ay.goruntule">Görüntüle →</a>
+        <a id="hukukKosullar" href="https://repertuvar.app/terms" target="_blank" rel="noopener" class="setting-btn" data-i18n="ay.goruntule">Görüntüle →</a>
       </div>
     </div>
 
@@ -746,9 +746,26 @@ function dilKutusunuDoldur() {
   }
 }
 
+// (2026-09-08) Hukuki sayfaların dil karşılığı. Yalnızca 'en' için ayrı sayfa
+// var; başka bir dil eklenirse Türkçe sürüm gösterilir — var olmayan bir /xx/
+// yoluna göndermek 404 üretir, yanlış dilde metin ise hiç değilse okunabilir.
+function hukukBaglantilariniKur() {
+  var en = (window.i18n && i18n.dil() === 'en');
+  var g = document.getElementById('hukukGizlilik');
+  var k = document.getElementById('hukukKosullar');
+  if (g) g.href = 'https://repertuvar.app/privacy' + (en ? '/en/' : '');
+  if (k) k.href = 'https://repertuvar.app/terms'   + (en ? '/en/' : '');
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', hukukBaglantilariniKur);
+} else {
+  hukukBaglantilariniKur();
+}
+
 function dilDegistir(yeni) {
   if (!window.i18n || !i18n.ayarla(yeni)) return;
   dilKutusunuDoldur();
+  hukukBaglantilariniKur();   // bağlantılar da yeni dile geçsin
   // Tercih profilde de saklanıyor: başka cihazda aynı dil gelsin.
   try {
     const uid = getUserId();
