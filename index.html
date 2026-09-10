@@ -86,7 +86,7 @@
     @media (max-width: 900px) {
       .hero-section { flex-direction: column; gap: 0; }
       .hero-text { flex: 0 1 auto !important; width: 100% !important; }
-      .hero-bullets { display: grid; grid-template-columns: 1fr 1fr; column-gap: 14px; row-gap: 0; }
+      .hero-bullets { display: grid; grid-template-columns: 1fr 1fr; column-gap: 14px; row-gap: 0; align-items: start; }
       .hero-actions { margin-bottom: 24px; }
       .hero-visual-row { flex: 0 1 auto !important; width: 100% !important; }
       .hero-preview-wrap { max-width: 100% !important; margin-left: 0 !important; }
@@ -94,8 +94,8 @@
     }
 
     .hero-bullets { list-style:none; margin:0 0 20px; padding:0; }
-    .hero-bullets li { font-size:15px; line-height:1.5; color:var(--text2); padding:6px 0; display:flex; align-items:center; gap:8px; }
-    .hero-bullets li i { color:var(--accent); font-size:16px; width:18px; text-align:center; flex-shrink:0; }
+    .hero-bullets li { font-size:15px; line-height:1.5; color:var(--text2); padding:6px 0; display:flex; align-items:flex-start; gap:8px; }
+    .hero-bullets li i { color:var(--accent); font-size:16px; width:18px; text-align:center; flex-shrink:0; margin-top:3px; }
 
     @keyframes previewFloat { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(.4deg); } }
     @keyframes glowPulse { 0%,100% { opacity:.5; transform:scale(1); } 50% { opacity:.8; transform:scale(1.05); } }
